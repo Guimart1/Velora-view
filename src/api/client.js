@@ -1,4 +1,19 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
+function getApiBaseUrl() {
+  // 1. Se foi definida a variável de ambiente VITE_API_URL (ex: na Vercel ou .env), usa ela
+  if (import.meta.env.VITE_API_URL) {
+    return import.meta.env.VITE_API_URL.replace(/\/$/, "");
+  }
+
+  // 2. Se estiver rodando localmente no computador em desenvolvimento (localhost ou 127.0.0.1)
+  if (typeof window !== "undefined" && (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")) {
+    return "http://127.0.0.1:8000";
+  }
+
+  // 3. Se estiver hospedado na Vercel em produção e nenhuma URL externa foi passada, tenta usar rotas relativas
+  return "";
+}
+
+const API_BASE_URL = getApiBaseUrl();
 
 /**
  * Converte strings de data da API em um objeto Date Javascript correto.
