@@ -278,7 +278,7 @@ export function CortesView({ manutencoesLinhas = [] }) {
                       <th className="py-2.5 px-4">Data do Corte</th>
                       <th className="py-2.5 px-4">Trecho / Quilometragem</th>
                       <th className="py-2.5 px-4">Equipe Responsável</th>
-                      <th className="py-2.5 px-3 text-center">Altura no Corte</th>
+                      <th className="py-2.5 px-3 text-center">Altura Pré-Corte</th>
                       <th className="py-2.5 px-4">Observação Operacional</th>
                       <th className="py-2.5 px-3 text-center">Status</th>
                     </tr>

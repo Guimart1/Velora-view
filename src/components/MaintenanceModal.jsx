@@ -260,10 +260,10 @@ export function MaintenanceModal({
             </div>
           </div>
 
-          {/* Altura no Corte */}
+          {/* Altura Pré-Corte */}
           <div>
             <label className="block text-[11px] font-bold text-slate-300 mb-1">
-              Altura no Corte (cm)
+              Altura Pré-Corte (cm)
             </label>
             <input
               type="number"
