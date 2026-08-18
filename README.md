@@ -69,24 +69,3 @@ npm run build
 ```
 
 Os arquivos compilados serão gerados na pasta `dist/`.
-
----
-
-## 🚀 Publicação na Vercel
-
-O projeto possui o arquivo `vercel.json` pré-configurado para roteamento SPA de 1 clique:
-
-1. Importe este repositório no painel da **[Vercel](https://vercel.com)**.
-2. Defina o Framework Preset como **Vite**.
-3. Adicione a variável de ambiente `VITE_API_URL` com a URL do seu backend.
-4. Clique em **Deploy**.
-
----
-
-## 👥 Créditos & Identificação
-
-* **Sistema:** VELÖRA
-* **Empresa:** Motiva Rodovias
-* **Instituição:** FIAP
-* **Turma:** 2 CCPX
-* **Grupo:** 43
