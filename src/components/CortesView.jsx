@@ -269,7 +269,7 @@ export function CortesView({ manutencoesLinhas = [] }) {
                 </span>
               </div>
 
-              {/* Tabela Específica da Rodovia */}
+              {/* Tabela Específica da Rodovia sem a coluna redundante de altura */}
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
                   <thead>
@@ -278,7 +278,6 @@ export function CortesView({ manutencoesLinhas = [] }) {
                       <th className="py-2.5 px-4">Data do Corte</th>
                       <th className="py-2.5 px-4">Trecho / Quilometragem</th>
                       <th className="py-2.5 px-4">Equipe Responsável</th>
-                      <th className="py-2.5 px-3 text-center">Altura Pré-Corte</th>
                       <th className="py-2.5 px-4">Observação Operacional</th>
                       <th className="py-2.5 px-3 text-center">Status</th>
                     </tr>
@@ -313,15 +312,6 @@ export function CortesView({ manutencoesLinhas = [] }) {
                         {/* Equipe Responsável */}
                         <td className="py-3 px-4 text-slate-200 font-medium">
                           {m?.equipe || "Equipe Não Informada"}
-                        </td>
-
-                        {/* Altura no Corte (cm) */}
-                        <td className="py-3 px-3 text-center font-mono tabular-nums">
-                          {m?.altura_grama_no_corte_cm != null ? (
-                            <span className="font-bold text-slate-200">{m.altura_grama_no_corte_cm} cm</span>
-                          ) : (
-                            <span className="text-slate-500 italic text-[11px]">-</span>
-                          )}
                         </td>
 
                         {/* Observação Operacional */}

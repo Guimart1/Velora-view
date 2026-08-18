@@ -26,7 +26,6 @@ export function MaintenanceModal({
   const [dataCorte, setDataCorte] = useState(() => new Date().toISOString().split("T")[0]);
   const [equipe, setEquipe] = useState(EQUIPES_PADRAO[0]);
   const [observacao, setObservacao] = useState("Corte de rotina e poda de acostamento.");
-  const [alturaGrama, setAlturaGrama] = useState("24.0");
 
   const [autoPredicao, setAutoPredicao] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -39,11 +38,6 @@ export function MaintenanceModal({
     if (preselectedTrecho) {
       const selectedId = preselectedTrecho.trecho_id || preselectedTrecho.id;
       setTrechoId(selectedId != null ? String(selectedId) : "");
-      
-      const altVal = preselectedTrecho.altura_grama_cm ?? preselectedTrecho.altura_atual_cm;
-      if (altVal != null) {
-        setAlturaGrama(String(Math.max(0, altVal)));
-      }
     } else {
       setTrechoId("");
     }
@@ -73,13 +67,6 @@ export function MaintenanceModal({
     setErrorCode(null);
     setSuccessMsg(null);
 
-    const numAltura = parseFloat(alturaGrama);
-    if (!isNaN(numAltura) && numAltura < 0) {
-      setErrorMsg("A altura da grama não pode ser um número negativo.");
-      setIsLoading(false);
-      return;
-    }
-
     if (!trechoId) {
       setErrorMsg("Por favor, selecione um trecho rodoviário válido.");
       setIsLoading(false);
@@ -94,9 +81,6 @@ export function MaintenanceModal({
 
     if (observacao && observacao.trim()) {
       payload.observacao = observacao.trim();
-    }
-    if (!isNaN(numAltura) && numAltura >= 0) {
-      payload.altura_grama_no_corte_cm = numAltura;
     }
 
     if (autoPredicao && autoPredicao.id != null) {
@@ -258,26 +242,6 @@ export function MaintenanceModal({
                 ))}
               </select>
             </div>
-          </div>
-
-          {/* Altura Pré-Corte */}
-          <div>
-            <label className="block text-[11px] font-bold text-slate-300 mb-1">
-              Altura Pré-Corte (cm)
-            </label>
-            <input
-              type="number"
-              min="0"
-              step="0.1"
-              placeholder="Ex: 24.0"
-              value={alturaGrama}
-              onChange={(e) => {
-                const val = e.target.value;
-                if (val !== "" && parseFloat(val) < 0) return;
-                setAlturaGrama(val);
-              }}
-              className="w-full bg-[#12171E] border border-[#2A323D] rounded-xl px-3 py-2 text-slate-200 focus:outline-none focus:border-[#B5FF57] font-mono tabular-nums font-bold"
-            />
           </div>
 
           {/* VÍNCULO DO TRECHO */}
