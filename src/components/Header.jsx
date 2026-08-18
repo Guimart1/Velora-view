@@ -9,6 +9,7 @@ import {
   PanelLeftOpen 
 } from "lucide-react";
 import logoImg from "../assets/logo.png";
+import { API_BASE_URL, getApiConnectionType } from "../api/client";
 
 export function Header({ 
   sidebarOpen, 
@@ -19,6 +20,7 @@ export function Header({
   onOpenMaintenanceModal 
 }) {
   const [imgError, setImgError] = useState(false);
+  const connectionType = getApiConnectionType();
 
   return (
     <header className="h-16 bg-[#12171E] border-b border-[#2A323D] sticky top-0 z-40 flex items-center justify-between px-4 sm:px-6 transition-colors">
@@ -54,21 +56,24 @@ export function Header({
         </div>
       </div>
 
-      {/* Right Section: Status, Swagger & Action Button */}
+      {/* Right Section: Status (Local, Remoto ou Desconectado), Swagger & Action Button */}
       <div className="flex items-center space-x-2.5">
         
-        {/* Telemetry Status */}
+        {/* Indicador Inteligente de Conexão (Local, Remoto ou Desconectado) */}
         <div
-          className={`hidden md:flex items-center space-x-1.5 px-2.5 py-1 rounded-md text-xs font-mono border ${
-            apiOnline
+          className={`hidden md:flex items-center space-x-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-bold border transition ${
+            !apiOnline
+              ? "bg-red-500/10 text-red-400 border-red-500/30"
+              : connectionType === "Local"
               ? "bg-[#B5FF57]/10 text-[#B5FF57] border-[#B5FF57]/30"
-              : "bg-red-500/10 text-red-400 border-red-500/30"
+              : "bg-sky-500/10 text-sky-400 border-sky-500/30"
           }`}
+          title={apiOnline ? `Conectado via API ${connectionType} (${API_BASE_URL || "Servidor Principal"})` : "Servidor FastAPI Desconectado"}
         >
           {apiOnline ? (
             <>
               <CheckCircle2 className="w-3.5 h-3.5" strokeWidth={1.75} />
-              <span>Conectado (:8000)</span>
+              <span>Conectado ({connectionType})</span>
             </>
           ) : (
             <>
@@ -90,7 +95,7 @@ export function Header({
 
         {/* External Link to Swagger */}
         <a
-          href="http://127.0.0.1:8000/docs"
+          href={`${API_BASE_URL || "http://127.0.0.1:8000"}/docs`}
           target="_blank"
           rel="noreferrer"
           className="hidden sm:flex items-center space-x-1 px-2.5 py-1.5 rounded-lg bg-[#1E242C] text-slate-300 hover:bg-[#2A323D] hover:text-white border border-[#2A323D] text-xs font-medium transition"

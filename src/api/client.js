@@ -13,7 +13,17 @@ function getApiBaseUrl() {
   return "";
 }
 
-const API_BASE_URL = getApiBaseUrl();
+export const API_BASE_URL = getApiBaseUrl();
+
+/**
+ * Identifica se a API conectada é "Local" ou "Remoto"
+ */
+export function getApiConnectionType() {
+  if (!API_BASE_URL || API_BASE_URL.includes("127.0.0.1") || API_BASE_URL.includes("localhost")) {
+    return "Local";
+  }
+  return "Remoto";
+}
 
 /**
  * Converte strings de data da API em um objeto Date Javascript correto.
