@@ -1,0 +1,72 @@
+@import "leaflet/dist/leaflet.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-[#0B0F14] text-slate-100 antialiased min-h-screen selection:bg-[#B5FF57] selection:text-slate-950 font-sans;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+/* Formatação Numérica Tabular para Telemetria e Quilometragem */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Custom scrollbars elegantes */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a323d;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #384352;
+}
+
+/* Leaflet Container Styling */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 0.75rem;
+  z-index: 1;
+  background-color: #0B0F14 !important;
+}
+
+/* Correção crítica de Tile Images do Leaflet no Tailwind CSS */
+.leaflet-container img,
+.leaflet-tile-container img,
+.leaflet-tile {
+  max-width: none !important;
+  max-height: none !important;
+  width: 256px !important;
+  height: 256px !important;
+  mix-blend-mode: normal !important;
+  opacity: 1 !important;
+  display: block !important;
+}
+
+/* Leaflet Map Popup */
+.leaflet-popup-content-wrapper {
+  background-color: #1e242c !important;
+  color: #f1f5f9 !important;
+  border: 1px solid #2a323d !important;
+  border-radius: 0.75rem !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.7) !important;
+}
+
+.leaflet-popup-tip {
+  background-color: #1e242c !important;
+}
